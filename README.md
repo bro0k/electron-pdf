@@ -7,7 +7,7 @@ Pdf rendering service with [electron](http://electron.atom.io/)
 With Docker:
 
 ```sh
-$ docker run -p 3000:3000 janpot/electron-pdf
+$ docker run -p 3000:3000 bro0k/electron-pdf
 ```
 
 Run locally
