@@ -15,4 +15,4 @@ mkdir -p /var/run/dbus
 sleep 1
 
 # Start application
-/opt/node_modules/electron/cli.js /opt
+/usr/local/bin/electron /opt

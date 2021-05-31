@@ -3,8 +3,8 @@ FROM node:lts
 WORKDIR /opt
 
 RUN apt-get update && \
-  apt-get install -y libgconf2-4 libxtst6 libnss3 libasound2 xvfb dbus-x11 libxss1 unzip libatk-bridge2.0-0 libgtk-3.so.0
-# RUN npm install -g electron --unsafe-perm=true --allow-root
+  apt-get install -y libgconf2-4 libxtst6 libnss3 libasound2 xvfb dbus-x11 libgtk2.0-common libxss1 unzip libatk-bridge2.0-0
+RUN npm install -g electron --unsafe-perm=true --allow-root
 
 COPY ./fonts/* /usr/share/fonts
 
