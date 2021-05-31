@@ -1,4 +1,4 @@
-FROM iojs:3.0
+FROM node:lts
 
 WORKDIR /opt
 
