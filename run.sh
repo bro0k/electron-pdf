@@ -15,4 +15,4 @@ mkdir -p /var/run/dbus
 sleep 1
 
 # Start application
-/usr/local/bin/electron --no-sandbox /opt
+/usr/local/bin/electron /opt
