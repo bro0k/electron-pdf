@@ -5,7 +5,7 @@ WORKDIR /opt
 RUN apt-get update
 RUN apt-get -y install libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1
 
-RUN npm install -g electron
+RUN npm install -g electron --verbose
 
 COPY ./fonts/* /usr/share/fonts
 
