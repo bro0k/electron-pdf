@@ -8,8 +8,7 @@ name: Create and publish a Docker image
 on:
   push:
     tags:
-      - v2021.*
-      - v2022.*
+      - v20**
 
 env:
   REGISTRY: ghcr.io
