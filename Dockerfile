@@ -4,7 +4,7 @@ WORKDIR /opt
 
 COPY ./fonts/* /usr/share/fonts
 
-RUN apt-get update && apt-get -y nodejs
+RUN apt-get update && apt-get -y install nodejs
 
 COPY ./package.json /opt/package.json
 RUN npm install
