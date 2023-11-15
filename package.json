@@ -4,6 +4,7 @@
   "description": "Pdf rendering service based on atom/electron",
   "main": "./lib",
   "scripts": {
+    "start": "electron ./lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./lib"
   },
@@ -30,9 +31,9 @@
     "express": "^4.13.3",
     "generic-pool": "^2.2.0",
     "is-absolute-url": "^2.0.0",
-    "node-uuid": "^1.4.3"
+    "node-uuid": "^1.4.3",
+    "electron-pdf": "^25.0.0"
   },
   "devDependencies": {
-    "eslint": "^1.1.0"
   }
 }

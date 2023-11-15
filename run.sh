@@ -15,4 +15,5 @@ mkdir -p /var/run/dbus
 sleep 1
 
 # Start application
-/usr/local/bin/electron /opt
+cd /opt
+npm run start
