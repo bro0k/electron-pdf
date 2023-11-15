@@ -4,7 +4,7 @@ WORKDIR /opt
 
 COPY ./fonts/* /usr/share/fonts
 
-RUN apt-get update && apt-get libxss1 libx11-xcb1 xvfb
+RUN apt-get update && apt-get libx11-xcb1 xvfb
 
 COPY ./package.json /opt/package.json
 RUN npm install
