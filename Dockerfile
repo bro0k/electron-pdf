@@ -12,6 +12,6 @@ RUN yarn
 
 COPY ./run.sh /opt/run.sh
 COPY ./lib/ /opt/lib/
-COPY ./node_modules/ /opt/
+COPY ./node_modules /opt
 
 CMD [ "sh", "/opt/run.sh" ]
