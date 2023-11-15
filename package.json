@@ -29,7 +29,6 @@
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "generic-pool": "^2.2.0",
     "is-absolute-url": "^2.0.0",
     "node-uuid": "^1.4.3",
     "electron-pdf": "^25.0.0"
