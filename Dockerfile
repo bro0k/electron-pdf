@@ -1,4 +1,4 @@
-FROM node:18
+FROM selenium/node-base:4
 
 WORKDIR /opt
 
