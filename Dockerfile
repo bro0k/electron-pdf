@@ -1,18 +1,11 @@
-FROM selenium/node-base:4
-
-USER root
-
-RUN apt-get update && apt-get -qqy install nodejs npm libatk-bridge2.0-0 libgtk-3-dev
-
-COPY ./fonts/* /usr/share/fonts
-
-USER 1200
+FROM node:18
 
 WORKDIR /opt
 
-RUN sudo chmod -R 775 /opt \
-  && sudo chgrp -R 0 /opt \
-  && sudo chmod -R g=u /opt
+RUN apt-get update
+RUN apt-get -y install libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1
+
+COPY ./fonts/* /usr/share/fonts
 
 COPY ./package.json /opt/package.json
 RUN npm install
