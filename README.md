@@ -47,3 +47,6 @@ Use following request headers to control the output pdf appearance.
 - `x-pdf-no-backgrounds`: Presence of this header prevents backgrounds from being printed.
 - `x-pdf-margins`: `default`, `none` or `minimum` - Margin type, defaults to `default`.
 - `x-pdf-pageSize`: `A4`, `A3`, `Legal`, `Letter` or `Tabloid` - Paper size, defaults to `A4`.
+- `x-pdf-pageSize`: `A4`, `A3`, `Legal`, `Letter` or `Tabloid` - Paper size, defaults to `A4`.
+- `x-pdf-outputWait or x-pdf-printDelay`: Time to wait (in MS) between page load and PDF creation. If used in conjunction with -e this will override the default timeout of 10 seconds.
+- `x-pdf-waitForJSEvent`: The name of the event to wait before PDF creation .
