@@ -1,17 +1,12 @@
-FROM buildpack-deps:bookworm
+FROM node:18
 
 WORKDIR /opt
 
 RUN apt-get update
 
-RUN apt-get install -y curl && \
-# Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
-  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-  apt-get install -y nodejs \
+RUN apt-get install -y && \
 # Required for a GUI
-  libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1 xvfb && \
-# Get rid of files we don't need
-  rm -rf /var/lib/apt/lists/*
+  libatk-bridge2.0-0 libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1 xvfb
 
 COPY ./run.sh /opt/run.sh
 COPY ./lib/ /opt/lib/
