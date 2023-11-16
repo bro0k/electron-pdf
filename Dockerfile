@@ -1,9 +1,11 @@
 FROM ubuntu:18.04
 
+WORKDIR /opt
+
 RUN apt-get update && \
   apt-get install -y curl && \
 # Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
-  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
   apt-get install -y nodejs \
 # Required for a GUI
     xvfb dbus-x11 libgtk-3-common \
@@ -20,7 +22,6 @@ RUN apt-get update && \
 
 # Copy this before user and folder permissions are assigned but as late as possible
 # To prevent additional docker layers from needing rebuilt when it changes
-WORKDIR /opt
 COPY ./run.sh /opt/run.sh
 COPY ./lib/ /opt/lib/
 COPY ./package.json /opt/package.json
@@ -45,5 +46,15 @@ USER sbe
 ENV NODE_ENV="production"
 # Must be after setting the sbe user or electron will choke on file permissions
 RUN npm install
+
+ENV \
+# Can optionally be mounted, otherwise all export artifacts will be ephemeral
+ELECTRONEXPORT_DATA="/data" \
+# This folder must be mounted into the container as a volume
+ELECTRONEXPORT_LOGDIR="/var/log/export" \
+# Size of each log file in MB, 10 files will be kept
+ELECTRONEXPORT_LOGSIZE="1" \
+# Log level for production environment
+ELECTRONEXPORT_LOGLEVEL="info"
 
 CMD [ "sh", "/opt/run.sh" ]
