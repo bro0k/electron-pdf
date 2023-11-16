@@ -1,12 +1,12 @@
-FROM buildpack-deps:jessie
+FROM buildpack-deps:bookworm
 
 WORKDIR /opt
 
-RUN sed -i 's;http://archive.debian.org/debian;http://deb.debian.org/debian;' /etc/apt/sources.list
+RUN apt-get update
 
 RUN apt-get install -y curl && \
 # Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
-  curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
   apt-get install -y nodejs \
 # Required for a GUI
   libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1 xvfb && \
