@@ -2,10 +2,9 @@ FROM buildpack-deps:jessie
 
 WORKDIR /opt
 
-RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list
-RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
-RUN sed -i '/deb http:\/\/\(deb\|httpredir\).debian.org\/debian jessie.* main/d' /etc/apt/sources.list
-RUN apt-get -o Acquire::Check-Valid-Until=false update
+RUN rm /etc/apt/sources.list
+RUN echo "deb http://archive.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list.d/jessie.list
+RUN echo "deb http://archive.debian.org/debian jessie main" >> /etc/apt/sources.list.d/jessie.list
 
 RUN apt-get install -y curl && \
 # Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
