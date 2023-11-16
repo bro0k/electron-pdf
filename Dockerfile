@@ -2,8 +2,12 @@ FROM buildpack-deps:jessie
 
 WORKDIR /opt
 
-RUN apt-get update && \
-  apt-get install -y curl && \
+RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list
+RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
+RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+RUN apt-get -o Acquire::Check-Valid-Until=false update
+
+RUN apt-get install -y curl && \
 # Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
   curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
   apt-get install -y nodejs \
