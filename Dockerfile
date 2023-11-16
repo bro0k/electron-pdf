@@ -6,7 +6,7 @@ WORKDIR /opt
 
 COPY ./fonts/* /usr/share/fonts
 
-RUN apt-get update && apt-get -qqy install nodejs npm libatk-bridge2.0-0 libgtk-3-dev libdbus-glib-1-de
+RUN apt-get update && apt-get -qqy install nodejs npm libatk-bridge2.0-0 libgtk-3-dev
 
 COPY ./package.json /opt/package.json
 RUN npm install
