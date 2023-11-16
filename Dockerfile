@@ -16,9 +16,7 @@ RUN apt-get update && \
 # Used for PDF->PNG splitting by pdf2images-multiple
     poppler-utils && \
 # Get rid of files we don't need
-  rm -rf /var/lib/apt/lists/* && \
-# Get latest npm
-  npm install -g npm
+  rm -rf /var/lib/apt/lists/*
 
 # Copy this before user and folder permissions are assigned but as late as possible
 # To prevent additional docker layers from needing rebuilt when it changes
