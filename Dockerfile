@@ -6,7 +6,7 @@ WORKDIR /opt
 
 COPY ./fonts/* /usr/share/fonts
 
-RUN apt-get update && apt-get -qqy install nodejs npm libatk-1.0
+RUN apt-get update && apt-get -qqy install nodejs npm libatk-bridge2.0-0
 
 COPY ./package.json /opt/package.json
 RUN npm install
