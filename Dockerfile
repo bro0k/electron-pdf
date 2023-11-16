@@ -2,9 +2,7 @@ FROM buildpack-deps:jessie
 
 WORKDIR /opt
 
-RUN rm /etc/apt/sources.list
-RUN echo "deb http://archive.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list.d/jessie.list
-RUN echo "deb http://archive.debian.org/debian jessie main" >> /etc/apt/sources.list.d/jessie.list
+RUN sed -i 's;http://archive.debian.org/debian;http://deb.debian.org/debian;' /etc/apt/sources.list
 
 RUN apt-get install -y curl && \
 # Node v7 doesn't cut it anymore, so lets get 18 (what electron packages)
