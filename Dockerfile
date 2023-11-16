@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM buildpack-deps:jessie
 
 WORKDIR /opt
 
@@ -8,51 +8,15 @@ RUN apt-get update && \
   curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
   apt-get install -y nodejs \
 # Required for a GUI
-    xvfb dbus-x11 libgtk-3-common \
-# Required by Electron (to run)
-    libxss1 libasound2 \
-# Required for PDF -> PNG Conversion
-    mupdf-tools \
-# Used for PDF->PNG splitting by pdf2images-multiple
-    poppler-utils && \
+  libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1 xvfb && \
 # Get rid of files we don't need
   rm -rf /var/lib/apt/lists/*
 
-# Copy this before user and folder permissions are assigned but as late as possible
-# To prevent additional docker layers from needing rebuilt when it changes
 COPY ./run.sh /opt/run.sh
 COPY ./lib/ /opt/lib/
 COPY ./package.json /opt/package.json
 COPY ./fonts/* /usr/share/fonts
 
-RUN \
-# sbe is a non-privileged user for running the export server
-# (so that there is no attack vector from root escalating out onto the host;
-#  this is a docker best practice for running in production)
-# Home directory is for the Chrome sandbox
-# Hard coded ids of 1500:1500 so we can map the user/group to the production host user/group
-groupadd -g 1500 -r sbe && \
-useradd -u 1500 --no-log-init -m -r -g sbe -G audio,video sbe && \
-mkdir -p /home/sbe/Downloads && \
-chown -R sbe:sbe /home/sbe && \
-chown -R sbe:sbe /opt && \
-chmod -R 755 /opt
-
-# Run as a non-privileged user (inside the container)
-USER sbe
-
-ENV NODE_ENV="production"
-# Must be after setting the sbe user or electron will choke on file permissions
 RUN npm install
-
-ENV \
-# Can optionally be mounted, otherwise all export artifacts will be ephemeral
-ELECTRONEXPORT_DATA="/data" \
-# This folder must be mounted into the container as a volume
-ELECTRONEXPORT_LOGDIR="/var/log/export" \
-# Size of each log file in MB, 10 files will be kept
-ELECTRONEXPORT_LOGSIZE="1" \
-# Log level for production environment
-ELECTRONEXPORT_LOGLEVEL="info"
 
 CMD [ "sh", "/opt/run.sh" ]

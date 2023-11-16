@@ -1,18 +1,18 @@
 #!/bin/sh
 
-export DISPLAY=:99
+rm -rf /tmp/.X*-lock
+
+export DISPLAY=:0
+
+# Start dbus
+mkdir -p /var/run/dbus
+/usr/bin/dbus-daemon --session --fork
 
 # Start xvfb
-if pgrep -x "Xvfb" > /dev/null
-then
-    echo "Xvfb is already running"
-else
-    echo "Starting Xvfb screen $DISPLAY"
-    rm /tmp/.X99-lock
-    /usr/bin/Xvfb $DISPLAY -ac -screen 0 1920x1280x24 &
-    # Give time to dbus & Xvfb to boot
-    sleep 1
-fi
+/usr/bin/Xvfb $DISPLAY -ac -screen 0 1920x1080x24 +extension RANDR &
+
+# Give time to dbus & Xvfb to boot
+sleep 1
 
 # Start application
 cd /opt
