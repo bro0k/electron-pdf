@@ -1,10 +1,12 @@
-FROM node:18
+FROM selenium/node-base:4
+
+USER root
 
 WORKDIR /opt
 
 COPY ./fonts/* /usr/share/fonts
 
-RUN apt-get update && apt-get -y install libgtkextra-dev libgconf2-dev libnss3 libasound2 libxtst-dev libxss1 libx11-xcb1
+RUN apt-get update && apt-get -qqy install nodejs
 
 COPY ./package.json /opt/package.json
 RUN npm install
