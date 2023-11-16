@@ -4,7 +4,7 @@
   "description": "Pdf rendering service based on atom/electron",
   "main": "./lib",
   "scripts": {
-    "start": "electron ./lib/index.js",
+    "start": "electron --no-sandbox ./lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./lib"
   },
