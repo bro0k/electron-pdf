@@ -9,13 +9,13 @@ RUN apt-get install -y \
   xfonts-100dpi \
   xfonts-75dpi \
   xfonts-scalable \
-  xfonts-cyrillic \
+#  xfonts-cyrillic \
   x11-apps \
   clang \
   libdbus-1-dev \
   libgtk2.0-dev \
   libnotify-dev \
-  libgnome-keyring-dev \
+#  libgnome-keyring-dev \
   libgconf2-dev \
   libasound2-dev \
   libcap-dev \
@@ -24,8 +24,7 @@ RUN apt-get install -y \
   libxss1 \
   libnss3-dev \
   gcc-multilib \
-  g++-multilib \
-  ttf-liberation
+  g++-multilib
 
 WORKDIR /opt
 
